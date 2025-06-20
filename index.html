@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saif Anas - AWS DevOps Engineer | CI/CD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a'
+                        },
+                        secondary: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e'
+                        },
+                        accent: {
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c'
+                        },
+                        dark: {
+                            800: '#1f2937',
+                            900: '#111827'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'typing': 'typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        bounceGentle: {
+                            '0%, 20%, 50%, 80%, 100%': { transform: 'translateY(0)' },
+                            '40%': { transform: 'translateY(-10px)' },
+                            '60%': { transform: 'translateY(-5px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' },
+                            '50%': { boxShadow: '0 0 40px rgba(59, 130, 246, 0.8)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        typing: {
+                            '0%': { width: '0' },
+                            '100%': { width: '100%' }
+                        },
+                        'blink-caret': {
+                            '0%, 50%': { borderColor: 'transparent' },
+                            '51%, 100%': { borderColor: '#3b82f6' }
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'grid-pattern': 'linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)'
+                    },
+                    backgroundSize: {
+                        'grid': '20px 20px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid #3b82f6;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .skill-progress {
+            transition: width 2s ease-in-out;
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        
+        .tech-tag {
+            transition: all 0.3s ease;
+        }
+        
+        .tech-tag:hover {
+            transform: scale(1.1);
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #3b82f6;
+            border: 4px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+        
+        .code-block {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            color: #e2e8f0;
+            overflow-x: auto;
+        }
+        
+        .terminal-window {
+            background: #1a1a1a;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .terminal-header {
+            background: #2d2d2d;
+            padding: 10px 15px;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27ca3f; }
+        
+        .terminal-content {
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            background: #000;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .glow-effect:hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 text-gray-800 scroll-smooth">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 shadow-lg border-b border-gray-200">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-primary-600 flex items-center">
+                    <i class="fas fa-terminal mr-3 text-accent-500"></i>
+                    <span class="bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
+                        Saif Anas
+                    </span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-600 hover:text-primary-600 transition-all duration-300 font-medium">Home</a>
+                    <a href="#about" class="nav-link text-gray-600 hover:text-primary-600 transition-all duration-300 font-medium">About</a>
+                    <a href="#skills" class="nav-link text-gray-600 hover:text-primary-600 transition-all duration-300 font-medium">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-600 hover:text-primary-600 transition-all duration-300 font-medium">Projects</a>
+                    <a href="#experience" class="nav-link text-gray-600 hover:text-primary-600 transition-all duration-300 font-medium">Experience</a>
+                    <a href="#contact" class="nav-link text-gray-600 hover:text-primary-600 transition-all duration-300 font-medium">Contact</a>
+                </div>
+                <button class="md:hidden text-gray-600 hover:text-primary-600 transition-colors" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 space-y-2 pb-4">
+                <a href="#home" class="block py-2 text-gray-600 hover:text-primary-600 transition-colors font-medium">Home</a>
+                <a href="#about" class="block py-2 text-gray-600 hover:text-primary-600 transition-colors font-medium">About</a>
+                <a href="#skills" class="block py-2 text-gray-600 hover:text-primary-600 transition-colors font-medium">Skills</a>
+                <a href="#projects" class="block py-2 text-gray-600 hover:text-primary-600 transition-colors font-medium">Projects</a>
+                <a href="#experience" class="block py-2 text-gray-600 hover:text-primary-600 transition-colors font-medium">Experience</a>
+                <a href="#contact" class="block py-2 text-gray-600 hover:text-primary-600 transition-colors font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-700"></div>
+        <div class="absolute inset-0 bg-grid-pattern bg-grid opacity-20"></div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-accent-500/20 rounded-full animate-float"></div>
+        <div class="absolute top-40 right-20 w-16 h-16 bg-secondary-500/20 rounded-full animate-float" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-40 left-20 w-12 h-12 bg-primary-500/20 rounded-full animate-float" style="animation-delay: 2s;"></div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="animate-fade-in">
+                <!-- Profile Image with Glow Effect -->
+                <div class="mb-8">
+                    <div class="w-40 h-40 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full mx-auto mb-6 flex items-center justify-center glow-effect animate-pulse-glow">
+                        <i class="fas fa-user-tie text-6xl text-white"></i>
+                    </div>
+                </div>
+                
+                <!-- Typing Animation for Name -->
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">
+                    <span class="typing-animation">Saif Anas</span>
+                </h1>
+                
+                <!-- Animated Role Description -->
+                <div class="text-xl md:text-2xl mb-8 text-blue-100">
+                    <span class="inline-block animate-slide-in-left">DevOps Engineer</span>
+                    <span class="mx-4 text-accent-400">|</span>
+                    <span class="inline-block animate-slide-in-right">CI/CD</span>
+                    <span class="mx-4 text-accent-400">|</span>
+                    <span class="inline-block animate-slide-up">Cloud Enthusiast</span>
+                </div>
+                
+                <!-- Enhanced Description -->
+                <p class="text-lg mb-12 max-w-3xl mx-auto text-blue-100 leading-relaxed animate-fade-in">
+                    Passionate about automating deployments, building robust CI/CD pipelines with 
+                    <span class="text-accent-400 font-semibold">Jenkins</span>, 
+                    and implementing scalable infrastructure solutions with 
+                    <span class="text-secondary-400 font-semibold">Docker</span> and 
+                    <span class="text-primary-400 font-semibold">Kubernetes</span>.
+                </p>
+                
+                <!-- Enhanced CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+                    <a href="#projects" class="group bg-accent-500 hover:bg-accent-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center">
+                        <i class="fas fa-rocket mr-3 group-hover:animate-bounce"></i>
+                        View My Projects
+                    </a>
+                    <a href="#contact" class="group glass-effect text-white hover:bg-white/20 px-8 py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center">
+                        <i class="fas fa-envelope mr-3 group-hover:animate-pulse"></i>
+                        Get In Touch
+                    </a>
+                    <a href="/SAIFANAS_RESUME.pdf" class="group bg-secondary-500 hover:bg-secondary-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
+                        <i class="fas fa-download mr-3 group-hover:animate-bounce"></i>
+                        Download Resume
+                    </a>
+                </div>
+                
+                <!-- Tech Stack Icons -->
+                <div class="flex justify-center space-x-8 mb-8">
+                    <div class="tech-icon group">
+                        <i class="fab fa-jenkins text-4xl text-blue-200 hover:text-accent-400 transition-colors duration-300 group-hover:animate-bounce"></i>
+                    </div>
+                    <div class="tech-icon group">
+                        <i class="fab fa-docker text-4xl text-blue-200 hover:text-secondary-400 transition-colors duration-300 group-hover:animate-bounce"></i>
+                    </div>
+                    <div class="tech-icon group">
+                        <i class="fab fa-aws text-4xl text-blue-200 hover:text-accent-400 transition-colors duration-300 group-hover:animate-bounce"></i>
+                    </div>
+                    <div class="tech-icon group">
+                        <i class="fab fa-git-alt text-4xl text-blue-200 hover:text-primary-400 transition-colors duration-300 group-hover:animate-bounce"></i>
+                    </div>
+                    <div class="tech-icon group">
+                        <i class="fab fa-python text-4xl text-blue-200 hover:text-secondary-400 transition-colors duration-300 group-hover:animate-bounce"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-gentle">
+                <div class="flex flex-col items-center text-white/70">
+                    <span class="text-sm mb-2">Scroll Down</span>
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-50 to-teal-50 opacity-50"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 animate-slide-up">About Me</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto mb-8"></div>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto animate-fade-in">
+                    Transforming ideas into scalable, automated solutions
+                </p>
+            </div>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left Column - Content -->
+                    <div class="space-y-8 animate-slide-in-left">
+                        <div class="bg-white rounded-2xl p-8 shadow-xl border border-gray-100">
+                            <h3 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+                                <i class="fas fa-code-branch text-primary-500 mr-4"></i>
+                                DevOps Engineer & Cloud Enthusiast
+                            </h3>
+                            <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                                Recent Computer Application graduate with hands-on experience in DevOps practices. 
+                                Completed intensive internship focusing on Jenkins pipeline automation, Docker containerization, 
+                                and end-to-end deployment strategies.
+                            </p>
+                            <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                                Passionate about implementing efficient CI/CD workflows, infrastructure as code, 
+                                and creating scalable solutions that bridge development and operations teams.
+                            </p>
+                            
+                            <!-- Skills Tags -->
+                            <div class="flex flex-wrap gap-3">
+                                <span class="tech-tag bg-gradient-to-r from-primary-500 to-primary-600 text-white px-4 py-2 rounded-full text-sm font-medium">Jenkins</span>
+                                <span class="tech-tag bg-gradient-to-r from-secondary-500 to-secondary-600 text-white px-4 py-2 rounded-full text-sm font-medium">Docker</span>
+                                <span class="tech-tag bg-gradient-to-r from-accent-500 to-accent-600 text-white px-4 py-2 rounded-full text-sm font-medium">CI/CD Advocate</span>
+                                <span class="tech-tag bg-gradient-to-r from-purple-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium">Cloud Native</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-gradient-to-br from-primary-500 to-primary-600 text-white p-6 rounded-xl text-center">
+                                <div class="text-3xl font-bold mb-2">2+</div>
+                                <div class="text-sm opacity-90">Months Experience</div>
+                            </div>
+                            <div class="bg-gradient-to-br from-secondary-500 to-secondary-600 text-white p-6 rounded-xl text-center">
+                                <div class="text-3xl font-bold mb-2">10+</div>
+                                <div class="text-sm opacity-90">Projects Completed</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Terminal/Code Display -->
+                    <div class="animate-slide-in-right">
+                        <div class="terminal-window">
+                            <div class="terminal-header">
+                                <div class="terminal-dot dot-red"></div>
+                                <div class="terminal-dot dot-yellow"></div>
+                                <div class="terminal-dot dot-green"></div>
+                                <span class="text-gray-300 text-sm ml-4">jenkins-pipeline.groovy</span>
+                            </div>
+                            <div class="terminal-content">
+                                <div class="text-green-400">
+                                    <div class="mb-2">pipeline {</div>
+                                    <div class="ml-4 mb-2">agent any</div>
+                                    <div class="ml-4 mb-2">stages {</div>
+                                    <div class="ml-8 mb-2">stage('Build') {</div>
+                                    <div class="ml-12 mb-2">steps {</div>
+                                    <div class="ml-16 mb-2 text-yellow-400">sh 'docker build -t app .'</div>
+                                    <div class="ml-12 mb-2">}</div>
+                                    <div class="ml-8 mb-2">}</div>
+                                    <div class="ml-8 mb-2">stage('Deploy') {</div>
+                                    <div class="ml-12 mb-2">steps {</div>
+                                    <div class="ml-16 mb-2 text-yellow-400">sh 'kubectl apply -f k8s/'</div>
+                                    <div class="ml-12 mb-2">}</div>
+                                    <div class="ml-8 mb-2">}</div>
+                                    <div class="ml-4 mb-2">}</div>
+                                    <div class="mb-2">}</div>
+                                    <div class="text-blue-400 animate-pulse">▊</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Facts Card -->
+                        <div class="mt-8 bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-2xl shadow-lg">
+                            <h4 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                                <i class="fas fa-info-circle text-primary-500 mr-3"></i>
+                                Quick Facts
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-graduation-cap text-primary-500 mr-3 w-5"></i>
+                                    <span>BCA Graduate (2020-2023)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt text-secondary-500 mr-3 w-5"></i>
+                                    <span>Sant Gadge Baba Amravati University</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-briefcase text-accent-500 mr-3 w-5"></i>
+                                    <span>DevOps Engineer Intern</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar text-purple-500 mr-3 w-5"></i>
+                                    <span>Oct 2024 - Nov 2024</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-50"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 animate-slide-up">Technical Arsenal</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto mb-8"></div>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto animate-fade-in">
+                    Comprehensive expertise in DevOps tools, cloud technologies, and modern development practices
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- DevOps Tools -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 animate-slide-up">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-cogs text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">DevOps Tools</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">Jenkins</span>
+                                <span class="text-sm text-gray-500">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-primary-500 to-primary-600 h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">Docker</span>
+                                <span class="text-sm text-gray-500">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-secondary-500 to-secondary-600 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">Git/GitHub</span>
+                                <span class="text-sm text-gray-500">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-accent-500 to-accent-600 h-2 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">CI/CD Pipelines</span>
+                                <span class="text-sm text-gray-500">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-purple-500 to-purple-600 h-2 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Programming Languages -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 animate-slide-up" style="animation-delay: 0.2s;">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-code text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Programming</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">Python</span>
+                                <span class="text-sm text-gray-500">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                               <!--<span class="text-gray-600 font-medium">JavaScript</span>
+                                <span class="text-sm text-gray-500">75%</span>>-->  
+                          <!--</div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-yellow-500 to-yellow-600 h-2 rounded-full" style="width: 75%"></div>-->  
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">Shell Scripting</span>
+                                <span class="text-sm text-gray-500">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-gray-500 to-gray-600 h-2 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">YAML</span>
+                                <span class="text-sm text-gray-500">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-red-500 to-red-600 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cloud & Infrastructure -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 animate-slide-up" style="animation-delay: 0.4s;">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-cloud text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Cloud & Infrastructure</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">AWS</span>
+                                <span class="text-sm text-gray-500">70%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-orange-500 to-orange-600 h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">Linux</span>
+                                <span class="text-sm text-gray-500">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">Kubernetes</span>
+                                <span class="text-sm text-gray-500">65%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-indigo-500 to-indigo-600 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-600 font-medium">Terraform</span>
+                                <span class="text-sm text-gray-500">60%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-progress bg-gradient-to-r from-purple-500 to-purple-600 h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- DevOps Workflow Diagram -->
+            <div class="bg-white rounded-2xl p-8 shadow-xl border border-gray-100 animate-fade-in">
+                <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">DevOps Workflow</h3>
+                <div class="flex flex-wrap justify-center items-center gap-4 md:gap-8">
+                    <div class="workflow-step flex flex-col items-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mb-3">
+                            <i class="fab fa-git-alt text-white text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-600">Code</span>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400 hidden md:block"></i>
+                    <div class="workflow-step flex flex-col items-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-hammer text-white text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-600">Build</span>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400 hidden md:block"></i>
+                    <div class="workflow-step flex flex-col items-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-vial text-white text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-600">Test</span>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400 hidden md:block"></i>
+                    <div class="workflow-step flex flex-col items-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-rocket text-white text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-600">Deploy</span>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-400 hidden md:block"></i>
+                    <div class="workflow-step flex flex-col items-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mb-3">
+                            <i class="fas fa-chart-line text-white text-xl"></i>
+                        </div>
+                        <span class="text-sm font-medium text-gray-600">Monitor</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-50 to-blue-50 opacity-50"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 animate-slide-up">Featured Projects</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto mb-8"></div>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto animate-fade-in">
+                    Real-world DevOps implementations showcasing automation and deployment expertise
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                <!-- Jenkins Pipeline Project -->
+                <div class="project-card bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden animate-slide-in-left">
+                    <div class="bg-gradient-to-br from-primary-500 to-primary-600 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fab fa-jenkins text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">End-to-End Jenkins Pipeline</h3>
+                        </div>
+                        <p class="text-blue-100 leading-relaxed">
+                            Comprehensive CI/CD pipeline implementation using Jenkins for automated build, test, and deployment processes.
+                        </p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                Key Features:
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 text-sm"></i>
+                                    Automated build and test execution
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 text-sm"></i>
+                                    Git webhook integration
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 text-sm"></i>
+                                    Multi-stage deployment pipeline
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 text-sm"></i>
+                                    Automated rollback mechanisms
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                <i class="fas fa-tools text-primary-500 mr-2"></i>
+                                Technologies Used:
+                            </h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-tag bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium">Jenkins</span>
+                                <span class="tech-tag bg-secondary-500 text-white px-3 py-1 rounded-full text-sm font-medium">Git</span>
+                                <span class="tech-tag bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-medium">Docker</span>
+                                <span class="tech-tag bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">Shell Scripts</span>
+                                <span class="tech-tag bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-medium">YAML</span>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <a href="#" class="flex-1 bg-primary-500 hover:bg-primary-600 text-white text-center py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fab fa-github mr-2"></i>View Code
+                            </a>
+                            <a href="#" class="flex-1 border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white text-center py-3 px-4 rounded-lg transition-all duration-300 font-medium">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Docker Voting App -->
+                <div class="project-card bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden animate-slide-in-right">
+                    <div class="bg-gradient-to-br from-secondary-500 to-secondary-600 p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fab fa-docker text-2xl text-white"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Dockerized Voting Application</h3>
+                        </div>
+                        <p class="text-teal-100 leading-relaxed">
+                            Complete containerization of a multi-service voting application using Docker and Docker Compose.
+                        </p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                <i class="fas fa-star text-yellow-500 mr-2"></i>
+                                Key Features:
+                            </h4>
+                            <ul class="space-y-2 text-gray-600">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 text-sm"></i>
+                                    Multi-container application setup
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 text-sm"></i>
+                                    Docker Compose orchestration
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 text-sm"></i>
+                                    Microservices architecture
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-green-500 mr-3 text-sm"></i>
+                                    Container networking and volumes
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                <i class="fas fa-tools text-secondary-500 mr-2"></i>
+                                Technologies Used:
+                            </h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="tech-tag bg-secondary-500 text-white px-3 py-1 rounded-full text-sm font-medium">Docker</span>
+                                <span class="tech-tag bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium">Docker Compose</span>
+                                <span class="tech-tag bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-medium">Python</span>
+                                <span class="tech-tag bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">Redis</span>
+                                <span class="tech-tag bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">PostgreSQL</span>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <a href="#" class="flex-1 bg-secondary-500 hover:bg-secondary-600 text-white text-center py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 font-medium">
+                                <i class="fab fa-github mr-2"></i>View Code
+                            </a>
+                            <a href="#" class="flex-1 border-2 border-secondary-500 text-secondary-500 hover:bg-secondary-500 hover:text-white text-center py-3 px-4 rounded-lg transition-all duration-300 font-medium">
+                                <i class="fas fa-external-link-alt mr-2"></i>Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Additional Projects Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-server text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Infrastructure as Code</h4>
+                    <p class="text-gray-600 text-sm mb-4">Terraform scripts for AWS infrastructure provisioning and management.</p>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="bg-purple-100 text-purple-600 px-2 py-1 rounded text-xs">Terraform</span>
+                        <span class="bg-orange-100 text-orange-600 px-2 py-1 rounded text-xs">AWS</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Monitoring Stack</h4>
+                    <p class="text-gray-600 text-sm mb-4">Complete monitoring solution with Prometheus, Grafana, and AlertManager.</p>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs">Prometheus</span>
+                        <span class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs">Grafana</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-dharmachakra text-white text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 mb-2">Kubernetes Deployment</h4>
+                    <p class="text-gray-600 text-sm mb-4">Scalable microservices deployment using Kubernetes orchestration.</p>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="bg-indigo-100 text-indigo-600 px-2 py-1 rounded text-xs">Kubernetes</span>
+                        <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">Helm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-50 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 opacity-50"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 animate-slide-up">Professional Journey</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto mb-8"></div>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto animate-fade-in">
+                    Building expertise through hands-on experience and continuous learning
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-1 h-full bg-gradient-to-b from-primary-500 to-secondary-500"></div>
+                    
+                    <!-- Experience Item -->
+                    <div class="relative flex items-center mb-12 timeline-item animate-slide-in-left">
+                        <div class="ml-16 md:ml-0 md:w-1/2 md:pr-8">
+                            <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center mr-4">
+                                        <i class="fas fa-building text-2xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-gray-800">Internship Studio</h3>
+                                        <p class="text-primary-600 font-semibold">DevOps Engineer Intern</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-6">
+                                    <div class="flex items-center text-gray-600 mb-2">
+                                        <i class="fas fa-calendar mr-3 text-primary-500"></i>
+                                        <span class="font-medium">October 2024 - November 2024</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-600">
+                                        <i class="fas fa-map-marker-alt mr-3 text-secondary-500"></i>
+                                        <span>Pune, India</span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-6">
+                                    <h4 class="font-semibold text-gray-800 mb-3 flex items-center">
+                                        <i class="fas fa-tasks text-accent-500 mr-2"></i>
+                                        Key Responsibilities:
+                                    </h4>
+                                    <ul class="space-y-2 text-gray-600">
+                                        <li class="flex items-start">
+                                            <i class="fas fa-arrow-right text-primary-500 mr-3 mt-1 text-sm"></i>
+                                            <span>Designed and implemented end-to-end CI/CD pipelines using Jenkins</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-arrow-right text-primary-500 mr-3 mt-1 text-sm"></i>
+                                            <span>Containerized applications using Docker and Docker Compose</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-arrow-right text-primary-500 mr-3 mt-1 text-sm"></i>
+                                            <span>Automated deployment processes and infrastructure management</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fas fa-arrow-right text-primary-500 mr-3 mt-1 text-sm"></i>
+                                            <span>Collaborated with development teams on DevOps best practices</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">Jenkins</span>
+                                    <span class="bg-gradient-to-r from-secondary-500 to-secondary-600 text-white px-3 py-1 rounded-full text-sm font-medium">Docker</span>
+                                    <span class="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-3 py-1 rounded-full text-sm font-medium">CI/CD</span>
+                                    <span class="bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">Automation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Item -->
+                    <div class="relative flex items-center timeline-item animate-slide-in-right">
+                        <div class="ml-16 md:ml-0 md:w-1/2 md:pl-8 md:ml-auto">
+                            <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-secondary-500 to-secondary-600 rounded-xl flex items-center justify-center mr-4">
+                                        <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-bold text-gray-800">Sant Gadge Baba Amravati University</h3>
+                                        <p class="text-secondary-600 font-semibold">Bachelor of Computer Application</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-6">
+                                    <div class="flex items-center text-gray-600 mb-2">
+                                        <i class="fas fa-calendar mr-3 text-primary-500"></i>
+                                        <span class="font-medium">2020 - 2023</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-600">
+                                        <i class="fas fa-map-marker-alt mr-3 text-secondary-500"></i>
+                                        <span>Amravati, Maharashtra</span>
+                                    </div>
+                                </div>
+
+                                <p class="text-gray-600 mb-6 leading-relaxed">
+                                    Completed comprehensive study in computer applications with focus on programming, 
+                                    database management, and software development practices. Built strong foundation 
+                                    in technology and problem-solving skills.
+                                </p>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-gradient-to-r from-secondary-500 to-secondary-600 text-white px-3 py-1 rounded-full text-sm font-medium">Programming</span>
+                                    <span class="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-3 py-1 rounded-full text-sm font-medium">Database</span>
+                                    <span class="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-3 py-1 rounded-full text-sm font-medium">Software Development</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-700 text-white relative overflow-hidden">
+        <!-- Animated Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-accent-500/10 rounded-full animate-float"></div>
+            <div class="absolute top-40 right-20 w-24 h-24 bg-secondary-500/10 rounded-full animate-float" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-40 left-20 w-20 h-20 bg-primary-500/10 rounded-full animate-float" style="animation-delay: 2s;"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-slide-up">Let's Build Something Amazing</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-accent-500 to-secondary-500 mx-auto mb-8"></div>
+                <p class="text-xl text-blue-100 max-w-2xl mx-auto animate-fade-in">
+                    Ready to collaborate on your next DevOps project? Let's automate, optimize, and scale together!
+                </p>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- Contact Information -->
+                    <div class="animate-slide-in-left">
+                        <h3 class="text-3xl font-bold mb-8 flex items-center">
+                            <i class="fas fa-rocket text-accent-500 mr-4"></i>
+                            Let's Connect
+                        </h3>
+                        <div class="space-y-6">
+                            <a href="mailto:saifanask@gmail.com" class="group flex items-center p-4 rounded-xl glass-effect hover:bg-white/20 transition-all duration-300">
+                                <div class="w-16 h-16 bg-gradient-to-br from-accent-500 to-accent-600 rounded-xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-envelope text-2xl text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-lg">Email</p>
+                                    <p class="text-blue-100">saifanask@gmail.com</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://github.com/saifanas" target="_blank" class="group flex items-center p-4 rounded-xl glass-effect hover:bg-white/20 transition-all duration-300">
+                                <div class="w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fab fa-github text-2xl text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-lg">GitHub</p>
+                                    <p class="text-blue-100">github.com/saifanas</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://www.linkedin.com/in/saif-anas-68bba2325/" target="_blank" class="group flex items-center p-4 rounded-xl glass-effect hover:bg-white/20 transition-all duration-300">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fab fa-linkedin text-2xl text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-lg">LinkedIn</p>
+                                    <p class="text-blue-100">Connect with me</p>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <!-- Quick Stats -->
+                        <div class="mt-12 grid grid-cols-2 gap-6">
+                            <div class="text-center p-6 glass-effect rounded-xl">
+                                <div class="text-3xl font-bold text-accent-400 mb-2">24/7</div>
+                                <div class="text-sm text-blue-100">Available for DevOps</div>
+                            </div>
+                            <div class="text-center p-6 glass-effect rounded-xl">
+                                <div class="text-3xl font-bold text-secondary-400 mb-2">100%</div>
+                                <div class="text-sm text-blue-100">Automation Focus</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="animate-slide-in-right">
+                        <h3 class="text-3xl font-bold mb-8 flex items-center">
+                            <i class="fas fa-paper-plane text-secondary-500 mr-4"></i>
+                            Send a Message
+                        </h3>
+                        <form class="space-y-6" onsubmit="handleFormSubmit(event)">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-blue-100 mb-2">Your Name</label>
+                                    <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:border-accent-400 focus:bg-white/20 transition-all duration-300" placeholder="John Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-blue-100 mb-2">Your Email</label>
+                                    <input type="email" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:border-accent-400 focus:bg-white/20 transition-all duration-300" placeholder="john@example.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-blue-100 mb-2">Subject</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:border-accent-400 focus:bg-white/20 transition-all duration-300" placeholder="DevOps Collaboration Opportunity">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-blue-100 mb-2">Your Message</label>
+                                <textarea rows="5" required class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-blue-200 focus:outline-none focus:border-accent-400 focus:bg-white/20 transition-all duration-300 resize-none" placeholder="Tell me about your project and how I can help..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white py-4 px-6 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl flex items-center justify-center">
+                                <i class="fas fa-rocket mr-3"></i>
+                                Launch Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-900 text-white py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <div class="text-2xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-terminal mr-3 text-accent-500"></i>
+                        <span class="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
+                            Saif Anas
+                        </span>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed">
+                        DevOps Engineer passionate about automation, CI/CD, and cloud technologies. 
+                        Building scalable solutions for the modern world.
+                    </p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-primary-400">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-accent-400 transition-colors">About</a></li>
+                        <li><a href="#skills" class="text-gray-400 hover:text-accent-400 transition-colors">Skills</a></li>
+                        <li><a href="#projects" class="text-gray-400 hover:text-accent-400 transition-colors">Projects</a></li>
+                        <li><a href="#experience" class="text-gray-400 hover:text-accent-400 transition-colors">Experience</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-accent-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Social Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-secondary-400">Connect With Me</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://github.com/saifanas" target="_blank" class="w-12 h-12 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/saif-anas-68bba2325/" target="_blank" class="w-12 h-12 bg-blue-600 hover:bg-blue-500 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="mailto:saifanask@gmail.com" class="w-12 h-12 bg-accent-600 hover:bg-accent-500 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110">
+                            <i class="fas fa-envelope text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2024 Shaikh Saif Anas. All rights reserved. | 
+                    <span class="text-primary-400">DevOps Engineer</span> | 
+                    Built with passion for automation and efficiency
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                document.getElementById('mobileMenu').classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary-600', 'font-semibold');
+                link.classList.add('text-gray-600');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.remove('text-gray-600');
+                    link.classList.add('text-primary-600', 'font-semibold');
+                }
+            });
+        });
+
+        // Form submission handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const name = formData.get('name') || event.target.querySelector('input[type="text"]').value;
+            const email = formData.get('email') || event.target.querySelector('input[type="email"]').value;
+            const subject = formData.get('subject') || event.target.querySelectorAll('input[type="text"]')[1].value;
+            const message = formData.get('message') || event.target.querySelector('textarea').value;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:saifanask@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            alert('Thank you for your message! Your email client should open now.');
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Typing animation restart
+        setInterval(() => {
+            const typingElement = document.querySelector('.typing-animation');
+            if (typingElement) {
+                typingElement.style.animation = 'none';
+                setTimeout(() => {
+                    typingElement.style.animation = 'typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite';
+                }, 100);
+            }
+        }, 10000);
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('#home');
+            const speed = scrolled * 0.5;
+            
+            if (parallax) {
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+
+        // Skill progress animation
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 500);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('#skills .bg-white').forEach(card => {
+            skillObserver.observe(card);
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        // Cursor trail effect (optional enhancement)
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.createElement('div');
+            cursor.className = 'fixed w-2 h-2 bg-primary-500 rounded-full pointer-events-none z-50 opacity-50';
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            document.body.appendChild(cursor);
+            
+            setTimeout(() => {
+                cursor.remove();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
