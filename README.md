@@ -11,7 +11,7 @@
 
 ## Live Demo
 
-<a [View Portfolio](https://saif-anas-portfolio.netlify.app)><strong>➥ Live Demo</strong></a>
+<a (https://saif-anas-portfolio.netlify.app)><strong>➥ Live Demo</strong></a>
 
   </div>
 
