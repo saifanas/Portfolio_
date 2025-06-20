@@ -9,7 +9,9 @@
 
   Saif's is a fully responsive personal portfolio website, <br />Responsive for all devices, build using HTML, CSS, and JavaScript.
 
-  <a href=saif-anas-portfolio.netlify.app/><strong>➥ Live Demo</strong></a>
+## Live Demo
+
+<a [View Portfolio](https://saif-anas-portfolio.netlify.app)><strong>➥ Live Demo</strong></a>
 
   </div>
 
